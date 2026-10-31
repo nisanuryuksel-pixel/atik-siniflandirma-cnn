@@ -30,3 +30,31 @@ plt.tight_layout()
 
 # Oluşturulan grafikleri ekranda gösterir.
 plt.show()
+
+# Karmaşıklık matrisi oluşturmak için gerekli kütüphaneleri içe aktarır.
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
+
+# Gerçek sınıflar ve modelin tahminleri kullanılarak karmaşıklık matrisi oluşturulur.
+cm = confusion_matrix(y_true, y_pred)
+
+# Karmaşıklık matrisinin grafik boyutunu belirler.
+plt.figure(figsize=(12, 10))
+
+# Karmaşıklık matrisini ısı haritası şeklinde görselleştirir.
+sns.heatmap(
+    cm,
+    annot=True,  # Hücrelerdeki değerleri gösterir.
+    fmt="d",  # Değerleri tam sayı olarak gösterir.
+    cmap="Blues",  # Mavi renk tonlarını kullanır.
+    xticklabels=class_names,  # Yatay eksende tahmin edilen sınıfları gösterir.
+    yticklabels=class_names  # Dikey eksende gerçek sınıfları gösterir.
+)
+
+plt.xlabel("Tahmin Edilen Sınıf")  # Yatay eksenin adını belirler.
+plt.ylabel("Gerçek Sınıf")  # Dikey eksenin adını belirler.
+plt.title("Atık Sınıflandırma Karmaşıklık Matrisi")  # Grafik başlığını belirler.
+plt.xticks(rotation=45)  # Yatay eksen etiketlerini 45 derece döndürür.
+plt.yticks(rotation=0)  # Dikey eksen etiketlerini yatay tutar.
+plt.tight_layout()  # Grafik düzenini ayarlar.
+plt.show()  # Grafiği ekranda gösterir.
